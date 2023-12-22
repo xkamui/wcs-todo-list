@@ -22,8 +22,27 @@
 </head>
 <body>
 
+    <button id="clearLocalStorage" type="button">[dev] Clear</button>
+
+    <section id="formNewTask">
+        <form action="?" id="formAddTask">
+            <div class="formRow">
+                <input type="text" name="title" id="newTaskTitle" maxlength="50">
+                <label for="title">Create new task<span class="required">*</span></label>
+            </div>
+            <div class="formRow">
+                <button type="button" id="saveNewTask">Save task</button>
+            </div>
+            <div class="formRow">
+                <span class="note">* Mandatory</span>
+            </div>
+        </form>
+    </section>
+
+    <button id="addNewTask">+<span>New task</span></button>
 
     <script src="assets/js/app.js" defer></script>
+    <script src="assets/js/saveTask.js" defer></script>
 
 </body>
 </html>
