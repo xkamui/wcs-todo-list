@@ -1,14 +1,19 @@
 //## Define the most used variables
-const initTask = [{id: 1, title : "Task example"}, {id: 2, title : "Another task example"}]
+const initTask = [
+    {id: 1, title : "Task example", done: false, deleted: false}, 
+    {id: 2, title : "Another task example", done: false, deleted: false}
+]
 const titleMaxLength = 50
 
 //## Define the most used elements
+const tasksList = document.querySelector('#tasksList')
 const formAddTask = document.querySelector('#formAddTask')
 const saveNewTask = document.querySelector('#saveNewTask')
 
 //## Once the page is loaded, init values
 document.addEventListener('DOMContentLoaded', function(){
     const allTasks = getTasksFromlocalStorage()
+    listTasks(allTasks)
 })
 
 

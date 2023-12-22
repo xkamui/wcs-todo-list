@@ -21,8 +21,15 @@ function checkTaskDatas(e) {
     
     // Save the task with the datas
     if (errors.valid === true) {
-        const taskDatas = {id: getMaxID(), title: title}
+        const taskDatas = {
+                            id: getMaxID(), 
+                            title: title,
+                            done: false,
+                            deleted: false
+                        }
+        
         saveTaskDatas(taskDatas)
+        listTasks(allTasks)
 
         // Reset form
         formAddTask.reset()

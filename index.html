@@ -24,8 +24,12 @@
 
     <button id="clearLocalStorage" type="button">[dev] Clear</button>
 
+    <section id="tasksList"></section>
+
     <section id="formNewTask">
         <form action="?" id="formAddTask">
+            <input type="hidden" name="mode" value="add" id="newTaskMode">
+            <input type="hidden" name="uid" value="" id="newTaskUid">
             <div class="formRow">
                 <input type="text" name="title" id="newTaskTitle" maxlength="50">
                 <label for="title">Create new task<span class="required">*</span></label>
@@ -43,6 +47,7 @@
 
     <script src="assets/js/app.js" defer></script>
     <script src="assets/js/saveTask.js" defer></script>
+    <script src="assets/js/listTasks.js" defer></script>
 
 </body>
 </html>
