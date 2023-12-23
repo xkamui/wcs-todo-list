@@ -6,6 +6,7 @@ const initTask = [
 const titleMaxLength = 50
 
 //## Define the most used elements
+let delButtons = edtButtons = []
 const tasksList = document.querySelector('#tasksList')
 const formAddTask = document.querySelector('#formAddTask')
 const saveNewTask = document.querySelector('#saveNewTask')
@@ -32,6 +33,43 @@ function getTasksFromlocalStorage() {
 
 }
 
+//## Manage actions on related buttons
+function initTaskActions() {
+
+    // Put all buttons in one array
+    actButtons = [...document.querySelectorAll('.action')]
+    
+    actButtons.forEach( butn => {
+        butn.addEventListener('click', function(e) {
+            e.preventDefault()
+
+            // Get useful details from closest element and dataset
+            const uid = parseInt(this.closest('article').dataset.uid)
+            const mode = this.dataset.mode
+            const currentTask = allTasks.filter((task) => task.id === uid)
+
+            // Swith on mode, and proceed with the related action
+            switch (mode) {
+                
+                // Edit task
+                case 'edit':
+                    break
+
+                // Delete task, with confirm dialog
+                case 'delete':
+                    if (confirm(`Are you sure you're willing to delete the task: ${currentTask[0].title}`)) {
+                        deleteTask(uid)
+                    }
+                    break
+
+            }
+
+            return false
+        }, false)
+    
+    })
+
+}
 
 //## [DEV] Clear all tasks from local storage
 document.querySelector('#clearLocalStorage').addEventListener('click', function(e) {
