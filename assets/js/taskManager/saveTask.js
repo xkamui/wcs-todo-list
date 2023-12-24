@@ -7,6 +7,8 @@ function checkTaskDatas(e) {
     
     const errors = {message: null, type: null, valid: true}
     const title = document.querySelector('#newTaskTitle').value
+    const uid = document.querySelector('#newTaskUid').value
+    console.log((uid === '' ? 'empty' : uid))
     
     // Check if datas are properlly settled
     if (title.length < 2) {
@@ -21,14 +23,28 @@ function checkTaskDatas(e) {
     
     // Save the task with the datas
     if (errors.valid === true) {
-        const taskDatas = {
-                            id: getMaxID(), 
-                            title: title,
-                            done: false,
-                            deleted: false
-                        }
+
+        if (uid === '') {
+            
+            // Adding a new task
+            const taskDatas = {
+                                id: getMaxID(), 
+                                title: title,
+                                done: false,
+                                deleted: false
+                            }
+
+            saveTaskDatas(taskDatas, uid)
+
+        } else {
+            allTasks.map((task) => {
+                if (task.id === parseInt(uid)) {
+                    task.title = title
+                }
+            })
+            window.localStorage.setItem('allTasks', JSON.stringify(allTasks))
+        }
         
-        saveTaskDatas(taskDatas)
         listTasks(allTasks)
 
         // Reset form
@@ -45,13 +61,21 @@ function checkTaskDatas(e) {
 
 
 //## Save new task and update the local storage
-function saveTaskDatas(datas) {
+function saveTaskDatas(datas, uid) {
+    if (uid !== '') {
+        removeFromArray(allTasks, uid)
+    }
     allTasks.push(datas)
     window.localStorage.setItem('allTasks', JSON.stringify(allTasks))
+    console.log(allTasks)
 }
 
 //## Get current max ID increment it for the new task ID
 function getMaxID() {
     const allIDs = allTasks.sort((a, b) => b.id - a.id)
     return (allIDs[0].id + 1)
+}
+
+function removeFromArray(arr, val) {
+    return arr.filter((elem) => elem.id !== parseInt(val))
 }

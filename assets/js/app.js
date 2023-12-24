@@ -4,6 +4,7 @@ const initTask = [
     {id: 2, title : "Another task example", done: false, deleted: false}
 ]
 const titleMaxLength = 50
+let currentTask = null
 
 //## Define the most used elements
 let delButtons = edtButtons = []
@@ -46,13 +47,14 @@ function initTaskActions() {
             // Get useful details from closest element and dataset
             const uid = parseInt(this.closest('article').dataset.uid)
             const mode = this.dataset.mode
-            const currentTask = allTasks.filter((task) => task.id === uid)
+            currentTask = allTasks.filter((task) => task.id === uid)
 
             // Swith on mode, and proceed with the related action
             switch (mode) {
                 
                 // Edit task
                 case 'edit':
+                    feedTaskUpdate()
                     break
 
                 // Delete task, with confirm dialog
